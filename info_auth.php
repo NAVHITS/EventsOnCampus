@@ -78,7 +78,7 @@ $res3=mysqli_query($db, $query4);
             ));
 
             $fields = array(
-                'app_id' => "c3a1dfba-1bc9-4978-bb36-965657450b6d",
+                'app_id' => "<Your app id here>",
                 'included_segments' => array('All'),
                 'data' => array("foo" => "bar"),
                 'headings' => $heading,
@@ -91,7 +91,7 @@ $res3=mysqli_query($db, $query4);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
-                'Authorization: Basic ZTk5MDBlNzUtZTg1My00MWFhLTg5ODUtYTdlMGY4ZTQxMjAz'));
+                'Authorization: Basic <your api key here>'));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
             curl_setopt($ch, CURLOPT_POST, TRUE);
