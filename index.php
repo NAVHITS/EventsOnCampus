@@ -23,7 +23,7 @@ include('sessions.php')
     <script>
         var OneSignal = window.OneSignal || [];
         OneSignal.push(["init", {
-            appId: "c3a1dfba-1bc9-4978-bb36-965657450b6d",
+            appId: "<Your app-id here>",
             autoRegister: true,
             httpPermissionRequest: {
                 enable: true
