@@ -56,18 +56,20 @@ $res3=mysqli_query($db, $query4);
                     $_SESSION['date']=date('F d, Y', strtotime($row['date']));
                     $_SESSION['url']=$url;
                     ?>
-                        <br/><br/><a class="disp" onclick="sendMessage()">|  Send Alert  |</a>
+                        <br/><br/><a class="disp" id="alert" name="alert" onClick='location.href="?alert=1&id=<?php echo $id?>"'>Send an alert</a>
                         <?php
+                        if($_GET['alert']){
                         $eve = $_SESSION['event'];
         $dt = $_SESSION['date'];
         $u = $_SESSION['url'];
+        
                         function sendMessage()
-        {
+        {       global $eve, $dt, $u;
             $heading = array(
-                "en" => $row['event']
+                "en" => $eve
             );
             $content = array(
-                "en" => "Event alert!"
+                "en" => "Event happening on ".$dt." Kindly visit now!"
             );
 
             $hashes_array = array();
@@ -78,7 +80,7 @@ $res3=mysqli_query($db, $query4);
             ));
 
             $fields = array(
-                'app_id' => "<Your app id here>",
+                'app_id' => "c3a1dfba-1bc9-4978-bb36-965657450b6d",
                 'included_segments' => array('All'),
                 'data' => array("foo" => "bar"),
                 'headings' => $heading,
@@ -91,7 +93,7 @@ $res3=mysqli_query($db, $query4);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
-                'Authorization: Basic <your api key here>'));
+                'Authorization: Basic ZTk5MDBlNzUtZTg1My00MWFhLTg5ODUtYTdlMGY4ZTQxMjAz'));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
             curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -104,9 +106,13 @@ $res3=mysqli_query($db, $query4);
             return $response;
         }
 
+echo '<script type=\"text/javascript"/>alert("Alert has been sent to all subscribed users!")</script>';
+                            
+                        }
         $response = sendMessage();
-        $return["allresponses"] = $response;
-        $return = json_encode($return);
+$return["allresponses"] = $response;
+$return = json_encode($return);
+
                         ?>
                 </div>
             </div>
