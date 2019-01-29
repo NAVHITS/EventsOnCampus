@@ -5,10 +5,8 @@ if (isset($_POST['send_alert'])) {
         $eve = $_SESSION['event'];
         $dt = $_SESSION['date'];
         $u = $_SESSION['url'];
-        echo $eve;
-        echo $dt;
-        echo $u;
-        
+  
+
         function sendMessage()
         {
             $heading = array(
@@ -26,7 +24,7 @@ if (isset($_POST['send_alert'])) {
             ));
 
             $fields = array(
-                'app_id' => "c3a1dfba-1bc9-4978-bb36-965657450b6d",
+                'app_id' => "<app_id>",
                 'included_segments' => array('All'),
                 'data' => array("foo" => "bar"),
                 'headings' => $heading,
@@ -39,7 +37,7 @@ if (isset($_POST['send_alert'])) {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
-                'Authorization: Basic ZTk5MDBlNzUtZTg1My00MWFhLTg5ODUtYTdlMGY4ZTQxMjAz'));
+                '<auth_key>'));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
             curl_setopt($ch, CURLOPT_POST, TRUE);
